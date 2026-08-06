@@ -9,6 +9,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Rutas de autenticación públicas (login/logout no requieren estar ya autenticado)
+  if (pathname === '/api/auth/login' || pathname === '/api/auth/logout') {
+    return NextResponse.next();
+  }
+
   // Rutas protegidas
   if (pathname.startsWith('/dashboard') || pathname.startsWith('/api')) {
     const token = request.cookies.get('auth_token')?.value;
