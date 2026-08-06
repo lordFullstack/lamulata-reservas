@@ -15,7 +15,10 @@ export async function middleware(request: NextRequest) {
   }
 
   // Rutas protegidas
-  if (pathname.startsWith('/dashboard') || pathname.startsWith('/api')) {
+  const protectedPages = ['/dashboard', '/calendario', '/habitaciones', '/reservas', '/pasadias', '/informes'];
+  const isProtectedPage = protectedPages.some((p) => pathname.startsWith(p));
+
+  if (isProtectedPage || pathname.startsWith('/api')) {
     const token = request.cookies.get('auth_token')?.value;
 
     if (!token) {
