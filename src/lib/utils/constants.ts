@@ -8,11 +8,11 @@ export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
-  ROOMS: '/dashboard/habitaciones',
-  CALENDAR: '/dashboard/calendario',
-  RESERVATIONS: '/dashboard/reservas',
-  DAY_PASSES: '/dashboard/pasadias',
-  REPORTS: '/dashboard/informes',
+  ROOMS: '/habitaciones',
+  CALENDAR: '/calendario',
+  RESERVATIONS: '/reservas',
+  DAY_PASSES: '/pasadias',
+  REPORTS: '/informes',
   LOGOUT: '/logout',
 } as const;
 
