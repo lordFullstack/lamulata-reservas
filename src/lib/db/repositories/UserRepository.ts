@@ -1,6 +1,6 @@
+import { randomUUID } from 'crypto';
 import { User } from '@/types/models';
 import { BaseRepository } from './BaseRepository';
-import { v4 as uuidv4 } from 'crypto';
 
 export class UserRepository extends BaseRepository<User> {
   protected tableName = 'users';
@@ -9,7 +9,7 @@ export class UserRepository extends BaseRepository<User> {
   async create(data: Omit<User, 'id' | 'createdAt' | 'updatedAt'>): Promise<User> {
     const user: User = {
       ...data,
-      id: uuidv4(),
+      id: randomUUID(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };

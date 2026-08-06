@@ -1,7 +1,7 @@
+import { randomUUID } from 'crypto';
 import { Room } from '@/types/models';
 import { RoomStatus, RoomType, Floor, ROOM_INVENTORY } from '@/types/enums';
 import { BaseRepository } from './BaseRepository';
-import { v4 as uuidv4 } from 'crypto';
 
 export class RoomRepository extends BaseRepository<Room> {
   protected tableName = 'rooms';
@@ -10,7 +10,7 @@ export class RoomRepository extends BaseRepository<Room> {
   async create(data: Omit<Room, 'id' | 'createdAt' | 'updatedAt'>): Promise<Room> {
     const room: Room = {
       ...data,
-      id: uuidv4(),
+      id: randomUUID(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };

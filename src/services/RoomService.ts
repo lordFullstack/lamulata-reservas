@@ -21,7 +21,7 @@ export class RoomService {
   }
 
   static async createRoom(data: CreateRoomRequest): Promise<Room> {
-    return Database.rooms.create(data);
+    return Database.rooms.create({ ...data, status: RoomStatus.AVAILABLE } as Omit<Room, 'id' | 'createdAt' | 'updatedAt'>);
   }
 
   static async updateRoomStatus(id: string, status: RoomStatus): Promise<Room> {

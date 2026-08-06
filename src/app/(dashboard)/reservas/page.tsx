@@ -142,12 +142,14 @@ export default function ReservationsPage() {
                 onChange={(e) => setFormData({ ...formData, advance: parseFloat(e.target.value) })}
               />
             </div>
-            <Input
-              label="Observaciones"
-              value={formData.observations}
-              onChange={(e) => setFormData({ ...formData, observations: e.target.value })}
-              as="textarea"
-            />
+            <div className="space-y-1">
+              <label className="block text-sm font-medium text-gray-700">Observaciones</label>
+              <textarea
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition border-gray-300"
+                value={formData.observations}
+                onChange={(e) => setFormData({ ...formData, observations: e.target.value })}
+              />
+            </div>
             <div className="flex gap-2">
               <Button type="submit" disabled={isPending}>
                 {isPending ? 'Guardando...' : 'Guardar Reserva'}

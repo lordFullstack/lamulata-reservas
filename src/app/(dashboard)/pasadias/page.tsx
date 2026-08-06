@@ -7,7 +7,8 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import { formatDate, formatCurrency, DAY_PASS_UNIT_PRICE } from '@/lib/utils';
+import { formatDate, formatCurrency } from '@/lib/utils';
+import { DAY_PASS_UNIT_PRICE } from '@/types/enums';
 import { DayPass } from '@/types/models';
 
 export default function DayPassesPage() {

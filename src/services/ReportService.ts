@@ -49,7 +49,7 @@ export class ReportService {
       dayPasses.reduce((acc, pass) => acc + pass.total, 0);
 
     return {
-      date: date.toISOString().split('T')[0],
+      date: date.toISOString().split('T')[0] ?? '',
       reservations: reservations.map((r) => ({
         ...r,
         checkInDate: r.checkInDate.toISOString(),

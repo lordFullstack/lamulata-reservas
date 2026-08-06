@@ -1,6 +1,6 @@
+import { randomUUID } from 'crypto';
 import { DayPass } from '@/types/models';
 import { BaseRepository } from './BaseRepository';
-import { v4 as uuidv4 } from 'crypto';
 import { isEqual, startOfDay, endOfDay } from 'date-fns';
 
 export class DayPassRepository extends BaseRepository<DayPass> {
@@ -10,7 +10,7 @@ export class DayPassRepository extends BaseRepository<DayPass> {
   async create(data: Omit<DayPass, 'id' | 'createdAt' | 'updatedAt'>): Promise<DayPass> {
     const dayPass: DayPass = {
       ...data,
-      id: uuidv4(),
+      id: randomUUID(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };

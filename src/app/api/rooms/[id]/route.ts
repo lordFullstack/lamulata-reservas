@@ -13,7 +13,7 @@ async function verifyAuth(request: NextRequest) {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await Database.initialize();
@@ -23,7 +23,7 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'No autorizado' }, { status: 401 });
     }
 
-    const room = await RoomService.getRoomById(params.id);
+    const room = await RoomService.getRoomById((await params).id);
     if (!room) {
       return NextResponse.json(
         { success: false, error: 'Habitación no encontrada' },

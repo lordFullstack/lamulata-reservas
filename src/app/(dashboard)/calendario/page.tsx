@@ -55,7 +55,7 @@ export default function CalendarPage() {
     return 'occupied';
   };
 
-  const statusColors = {
+  const statusColors: Record<string, string> = {
     available: 'bg-green-100 hover:bg-green-200',
     reserved: 'bg-blue-100 hover:bg-blue-200',
     occupied: 'bg-red-100 hover:bg-red-200',

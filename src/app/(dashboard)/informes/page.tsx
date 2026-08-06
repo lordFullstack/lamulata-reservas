@@ -13,8 +13,8 @@ export default function ReportsPage() {
   const { data: reservations, isLoading: loadingRes } = useReservations();
   const { data: dayPasses, isLoading: loadingPasses } = useDayPasses();
   const [dateRange, setDateRange] = useState({
-    startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    endDate: new Date().toISOString().split('T')[0],
+    startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] ?? '',
+    endDate: new Date().toISOString().split('T')[0] ?? '',
   });
 
   if (loadingRes || loadingPasses) {
@@ -22,12 +22,12 @@ export default function ReportsPage() {
   }
 
   const filteredReservations = reservations?.filter((res) => {
-    const checkIn = new Date(res.checkInDate).toISOString().split('T')[0];
+    const checkIn = new Date(res.checkInDate).toISOString().split('T')[0] ?? '';
     return checkIn >= dateRange.startDate && checkIn <= dateRange.endDate;
   }) || [];
 
   const filteredDayPasses = dayPasses?.filter((pass) => {
-    const date = new Date(pass.date).toISOString().split('T')[0];
+    const date = new Date(pass.date).toISOString().split('T')[0] ?? '';
     return date >= dateRange.startDate && date <= dateRange.endDate;
   }) || [];
 

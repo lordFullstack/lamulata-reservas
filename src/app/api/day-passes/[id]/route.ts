@@ -13,7 +13,7 @@ async function verifyAuth(request: NextRequest) {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await Database.initialize();
@@ -23,7 +23,7 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'No autorizado' }, { status: 401 });
     }
 
-    const dayPass = await DayPassService.getDayPassById(params.id);
+    const dayPass = await DayPassService.getDayPassById((await params).id);
     if (!dayPass) {
       return NextResponse.json(
         { success: false, error: 'Pasadía no encontrada' },
@@ -42,7 +42,7 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await Database.initialize();
@@ -52,7 +52,7 @@ export async function DELETE(
       return NextResponse.json({ success: false, error: 'No autorizado' }, { status: 401 });
     }
 
-    await DayPassService.deleteDayPass(params.id);
+    await DayPassService.deleteDayPass((await params).id);
     return NextResponse.json({ success: true, message: 'Pasadía eliminada' }, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {

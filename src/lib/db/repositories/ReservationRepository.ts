@@ -1,6 +1,6 @@
+import { randomUUID } from 'crypto';
 import { Reservation } from '@/types/models';
 import { BaseRepository } from './BaseRepository';
-import { v4 as uuidv4 } from 'crypto';
 import { isBefore, isAfter, isEqual } from 'date-fns';
 
 export class ReservationRepository extends BaseRepository<Reservation> {
@@ -12,7 +12,7 @@ export class ReservationRepository extends BaseRepository<Reservation> {
   ): Promise<Reservation> {
     const reservation: Reservation = {
       ...data,
-      id: uuidv4(),
+      id: randomUUID(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };

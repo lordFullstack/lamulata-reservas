@@ -15,7 +15,7 @@ async function verifyAuth(request: NextRequest) {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await Database.initialize();
@@ -25,7 +25,7 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'No autorizado' }, { status: 401 });
     }
 
-    const reservation = await ReservationService.getReservationById(params.id);
+    const reservation = await ReservationService.getReservationById((await params).id);
     if (!reservation) {
       return NextResponse.json(
         { success: false, error: 'Reserva no encontrada' },
@@ -44,7 +44,7 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await Database.initialize();
@@ -57,7 +57,7 @@ export async function PATCH(
     const body = await request.json();
     const parsed = updateReservationStatusSchema.parse(body);
 
-    const reservation = await ReservationService.updateReservationStatus(params.id, parsed.status);
+    const reservation = await ReservationService.updateReservationStatus((await params).id, parsed.status);
     return NextResponse.json({ success: true, data: reservation }, { status: 200 });
   } catch (error) {
     if (error instanceof ZodError) {
@@ -83,7 +83,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await Database.initialize();
@@ -93,7 +93,7 @@ export async function DELETE(
       return NextResponse.json({ success: false, error: 'No autorizado' }, { status: 401 });
     }
 
-    await ReservationService.deleteReservation(params.id);
+    await ReservationService.deleteReservation((await params).id);
     return NextResponse.json({ success: true, message: 'Reserva eliminada' }, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {
