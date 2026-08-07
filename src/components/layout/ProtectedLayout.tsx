@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 
@@ -13,6 +13,7 @@ interface ProtectedLayoutProps {
 export function ProtectedLayout({ children }: ProtectedLayoutProps) {
   const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -33,10 +34,10 @@ export function ProtectedLayout({ children }: ProtectedLayoutProps) {
   }
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Header />
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex-1 flex flex-col min-w-0">
+        <Header onMenuClick={() => setSidebarOpen(true)} />
         <main className="flex-1 overflow-auto bg-gray-50">
           {children}
         </main>

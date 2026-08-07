@@ -66,7 +66,7 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">Informes</h1>
         <p className="text-gray-600">Reportes y análisis del hotel</p>

@@ -59,8 +59,8 @@ export default function ReservationsPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8 flex justify-between items-center">
+    <div className="p-4 sm:p-8">
+      <div className="mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Reservas</h1>
           <p className="text-gray-600">Total: {reservations?.length || 0} reservas</p>

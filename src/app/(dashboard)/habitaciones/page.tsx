@@ -28,7 +28,7 @@ export default function RoomsPage() {
 
   if (!rooms || rooms.length === 0) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-8">
         <EmptyState title="Sin habitaciones" description="No hay habitaciones registradas" />
       </div>
     );
@@ -45,7 +45,7 @@ export default function RoomsPage() {
   );
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">Habitaciones</h1>
         <p className="text-gray-600">Total: {rooms.length} habitaciones</p>
